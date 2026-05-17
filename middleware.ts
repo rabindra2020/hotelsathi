@@ -5,8 +5,8 @@ export async function middleware(request: NextRequest) {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
-  // If Supabase environment variables are not set yet, bypass middleware to avoid crashing (500)
-  if (!supabaseUrl || !supabaseAnonKey) {
+  // If Supabase environment variables are not set yet or are placeholder, bypass middleware to avoid crashing (500)
+  if (!supabaseUrl || !supabaseAnonKey || !supabaseUrl.startsWith('http')) {
     return NextResponse.next()
   }
 
